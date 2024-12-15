@@ -3,7 +3,6 @@ function toggleMenu() {
     menu.classList.toggle('hidden');
 }
 
-// Typing Animation
 new Typed("#typed", {
     strings: ["Optimizing Performance and SEO", "Building Modern Web Applications", "Responsive and Accessible Websites"],
     typeSpeed: 50,
@@ -11,7 +10,6 @@ new Typed("#typed", {
     loop: true
 });
 
-// Smooth Scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -26,10 +24,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form Submission
 document.querySelector('form').addEventListener('submit', function(e) {
     e.preventDefault();
-    // Add your form submission logic here
     alert('Message sent successfully!');
     this.reset();
 });
