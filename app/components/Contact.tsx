@@ -64,7 +64,7 @@ export default function Contact() {
               </svg>
             </a>
             <a 
-              href="https://linkedin.com/in/aadityasinghal" 
+              href="https://linkedin.com/in/aaditya3301" 
               target="_blank" 
               rel="noopener noreferrer"
               className="social-link"
@@ -74,7 +74,7 @@ export default function Contact() {
               </svg>
             </a>
             <a 
-              href="https://twitter.com/aadityasinghal" 
+              href="https://x.com/aaditya_s3301" 
               target="_blank" 
               rel="noopener noreferrer"
               className="social-link"
