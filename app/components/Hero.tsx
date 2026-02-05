@@ -118,14 +118,16 @@ export default function Hero() {
           {/* CTA Buttons */}
           <div className="hero-cta">
             <motion.a
-              href="#projects"
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn-primary"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <span>Explore My Work</span>
+              <span>View Resume</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
               </svg>
             </motion.a>
             <motion.a
