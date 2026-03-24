@@ -1,0 +1,1443 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aaditya Singhal | AI & Cloud Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Geist+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --bg: #000000;
+            --surface: #0a0a0a;
+            --border: #1f1f1f;
+            --border2: #333333;
+            --text: #ffffff;
+            --muted: #a1a1aa;
+            --muted2: #71717a;
+            --green: #4ade80;
+            --green-dim: #1a3a26;
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 13px;
+            line-height: 1.7;
+            overflow-x: hidden;
+            cursor: none;
+            border: 1px solid var(--border);
+            max-width: 685px;
+            margin-left: 615px;
+        }
+
+        /* CURSOR */
+        #cur {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference
+        }
+
+        #cur-ring {
+            position: fixed;
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgba(255, 255, 255, .2);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width .2s, height .2s, border-color .2s
+        }
+
+        body.hovering #cur-ring {
+            width: 44px;
+            height: 44px;
+            border-color: rgba(255, 255, 255, .45)
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 14px 0;
+            border-bottom: 1px solid transparent;
+            transition: background .3s, border-color .3s, backdrop-filter .3s
+        }
+
+        nav.stuck {
+            background: rgba(10, 10, 10, .9);
+            backdrop-filter: blur(16px);
+            border-color: var(--border)
+        }
+
+        .nav-wrap {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px
+        }
+
+        .nav-links a {
+            font-family: 'Geist Mono', monospace;
+            font-size: 11.5px;
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: .02em;
+            transition: color .2s
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text)
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 10px;
+            align-items: center
+        }
+
+        .nav-icon {
+            color: var(--muted2);
+            cursor: pointer;
+            transition: color .2s;
+            background: none;
+            border: none;
+            padding: 4px;
+            display: flex
+        }
+
+        .nav-icon:hover {
+            color: var(--text)
+        }
+
+        /* LAYOUT */
+        .page {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 28px
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 64px 0;
+            border-bottom: 1px solid var(--border)
+        }
+
+        section:last-of-type {
+            border-bottom: none
+        }
+
+        .sec-title {
+            font-family: "Playfair Display", serif;
+            font-size: 28px;
+            font-weight: 500;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text);
+        }
+
+        .sec-title .hash {
+            color: #eab308;
+            font-weight: 500;
+            font-family: "Geist Mono", monospace;
+            font-size: 20px;
+            opacity: 0.8;
+            margin-left: 2px;
+        }
+
+        /* HERO */
+        #home {
+            padding-top: 108px
+        }
+
+        .hero-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 18px
+        }
+
+
+        .avatar {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            border: 1px solid var(--border2);
+            background: linear-gradient(135deg, #1a1a1a, #222);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            flex-shrink: 0;
+            overflow: hidden;
+            position: relative
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 65%;
+            border-radius: 50%
+        }
+
+        .online {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--green);
+            border: 2px solid var(--bg);
+            animation: glow 2s infinite
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(74, 222, 128, .5)
+            }
+
+            50% {
+                box-shadow: 0 0 0 5px rgba(74, 222, 128, 0)
+            }
+        }
+
+        .hero-name-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .hero-name {
+            font-family: "Playfair Display", serif;
+            font-size: 44px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 24px rgba(255, 255, 255, 0.15);
+            line-height: 1.1;
+        }
+
+        .hero-verified {
+            color: var(--green);
+            font-size: 12px
+        }
+
+        .hero-loc {
+            font-family: 'Geist Mono', monospace;
+            font-size: 11px;
+            color: var(--muted);
+            letter-spacing: .03em
+        }
+
+        .hero-role-wrap {
+            height: 16px;
+            overflow: hidden;
+            margin-top: 3px
+        }
+
+        .role-slider {
+            display: flex;
+            flex-direction: column;
+            transition: transform .42s cubic-bezier(.4, 0, .2, 1)
+        }
+
+        .role-item {
+            font-family: 'Geist Mono', monospace;
+            font-size: 11.5px;
+            color: var(--muted);
+            height: 16px;
+            line-height: 16px;
+            white-space: nowrap;
+            letter-spacing: .02em
+        }
+
+        .hero-desc {
+            font-size: 14.5px;
+            color: #d4d4d8;
+            line-height: 1.85;
+            margin-bottom: 28px;
+            max-width: 600px;
+        }
+
+        .hero-desc a {
+            color: var(--text);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #444;
+            transition: all .2s ease;
+            font-weight: 500;
+        }
+
+        .hero-desc a:hover {
+            background: rgba(234, 179, 8, 0.15);
+            border-color: #facc15;
+        }
+
+        /* SOCIALS */
+        .socials {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .soc {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--muted);
+            text-decoration: none;
+            transition: all .2s
+        }
+
+        .soc:hover {
+            border-color: var(--border2);
+            color: var(--text);
+            background: #161616
+        }
+
+        .soc svg {
+            width: 14px;
+            height: 14px
+        }
+
+        /* SKILLS */
+        .skills-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px
+        }
+
+        .skill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: "Geist Mono", monospace;
+            font-size: 11.5px;
+            color: #e4e4e7;
+            background: #0e0e0e;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 6px 14px;
+            letter-spacing: .02em;
+            transition: all .2s, opacity .35s, transform .35s;
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        .skill.in {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .skill:hover {
+            border-style: solid;
+            border-color: #888;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .sk-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        .lang .sk-dot {
+            background: #f7df1e
+        }
+
+        .framework .sk-dot {
+            background: #61dafb
+        }
+
+        .backend .sk-dot {
+            background: #68a063
+        }
+
+        .db .sk-dot {
+            background: #4479a1
+        }
+
+        .tool .sk-dot {
+            background: #e97627
+        }
+
+        .ai .sk-dot {
+            background: #a855f7
+        }
+
+        .blockchain .sk-dot {
+            background: #f59e0b
+        }
+
+        /* PROJECTS LIST */
+        .project {
+            position: relative;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            cursor: default
+        }
+
+        .projects-list .project:first-child {
+            border-top: 1px solid var(--border)
+        }
+
+        .proj-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px
+        }
+
+        .proj-left {
+            display: flex;
+            align-items: center;
+            gap: 7px
+        }
+
+        .proj-arrow {
+            color: var(--muted2);
+            font-size: 11px;
+            transition: color .2s;
+            margin-top: 1px
+        }
+
+        .project:hover .proj-arrow {
+            color: var(--muted)
+        }
+
+        .proj-title {
+            font-family: "Playfair Display", serif;
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: 0;
+            transition: color .2s;
+        }
+
+        .project:hover .proj-title {
+            font-family: "Playfair Display", serif;
+            font-size: 22px;
+            font-weight: 500;
+            letter-spacing: 0;
+            transition: color .2s;
+        }
+
+        .proj-icons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+            margin-top: 1px
+        }
+
+        .proj-icon-link {
+            color: var(--muted2);
+            text-decoration: none;
+            transition: color .2s;
+            display: flex
+        }
+
+        .proj-icon-link:hover {
+            color: var(--text)
+        }
+
+        .proj-icon-link svg {
+            width: 13px;
+            height: 13px
+        }
+
+        .proj-desc {
+            font-size: 13.5px;
+            color: #a1a1aa;
+            line-height: 1.75;
+            margin: 10px 0 14px;
+            max-width: 580px;
+        }
+
+        .tech-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px
+        }
+
+        .tech {
+            font-family: 'Geist Mono', monospace;
+            font-size: 10.5px;
+            color: #e4e4e7;
+            background: #161616;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 3px 10px;
+            letter-spacing: .02em;
+            transition: all .15s
+        }
+
+        .tech:hover {
+            color: #fff;
+            background: #222;
+            border-color: #555;
+        }
+
+        /* hover preview removed */
+
+        /* MORE BTN */
+        .more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 11px;
+            color: var(--muted);
+            text-decoration: none;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 7px 14px;
+            margin-top: 18px;
+            transition: all .2s;
+            letter-spacing: .03em
+        }
+
+        .more-btn:hover {
+            border-color: var(--border2);
+            color: var(--text);
+            background: #111
+        }
+
+        /* GITHUB CALENDAR */
+        .gh-wrap {
+            overflow-x: auto;
+            padding-bottom: 4px
+        }
+
+        .gh-cell {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            background: #141414;
+            border: 1px solid #1a1a1a;
+            transition: transform .1s;
+            flex-shrink: 0
+        }
+
+        .gh-cell:hover {
+            transform: scale(1.4);
+            z-index: 1
+        }
+
+        .gh-cell.l1 {
+            background: #1a3a26;
+            border-color: #1e4a2e
+        }
+
+        .gh-cell.l2 {
+            background: #22863a;
+            border-color: #2a9e46
+        }
+
+        .gh-cell.l3 {
+            background: #2ea043;
+            border-color: #36be4f
+        }
+
+        .gh-cell.l4 {
+            background: #4ade80;
+            border-color: #5ae88a
+        }
+
+        .gh-legend {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 10px;
+            color: #444
+        }
+
+        .gh-leg {
+            display: flex;
+            gap: 3px
+        }
+
+        .gh-leg-cell {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px
+        }
+
+        /* CERT */
+        .cert {
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px 18px;
+            background: #0c0c0c;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            transition: border-color .2s;
+            margin-bottom: 10px
+        }
+
+        .cert:hover {
+            border-color: var(--border2)
+        }
+
+        .cert-name {
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .cert-badge {
+            font-family: 'Geist Mono', monospace;
+            font-size: 10px;
+            color: var(--green);
+            background: var(--green-dim);
+            border: 1px solid #2a5a3a;
+            border-radius: 3px;
+            padding: 1px 7px;
+            letter-spacing: .03em
+        }
+
+        .cert-desc {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.7
+        }
+
+        .cert-ext {
+            color: var(--muted2);
+            text-decoration: none;
+            transition: color .2s;
+            flex-shrink: 0;
+            display: flex;
+            margin-top: 2px
+        }
+
+        .cert-ext:hover {
+            color: var(--text)
+        }
+
+        .cert-ext svg {
+            width: 13px;
+            height: 13px
+        }
+
+        /* BLOGS */
+        .blog {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            color: inherit;
+            transition: opacity .2s
+        }
+
+        .blogs-list .blog:first-child {
+            border-top: 1px solid var(--border)
+        }
+
+        .blog:hover {
+            opacity: .75
+        }
+
+        .blog-thumb {
+            width: 88px;
+            height: 58px;
+            border-radius: 5px;
+            background: #111;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            overflow: hidden
+        }
+
+        .blog-title {
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text);
+            margin-bottom: 4px
+        }
+
+        .blog-meta {
+            font-family: 'Geist Mono', monospace;
+            font-size: 10px;
+            color: var(--muted);
+            letter-spacing: .03em
+        }
+
+        /* EDUCATION & VOLUNTEER */
+        .edu-item,
+        .vol-item {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity .45s ease, transform .45s ease
+        }
+
+        .edu-item.in,
+        .vol-item.in {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        /* fallback: if JS doesn't fire, show them */
+        @media (prefers-reduced-motion: reduce) {
+
+            .edu-item,
+            .vol-item {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        .edu-list .edu-item:first-child,
+        .vol-list .vol-item:first-child {
+            border-top: 1px solid var(--border)
+        }
+
+        .edu-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px
+        }
+
+        .edu-school {
+            font-size: 13.5px;
+            font-weight: 500;
+            letter-spacing: -.01em
+        }
+
+        .edu-loc {
+            font-family: 'Geist Mono', monospace;
+            font-size: 10.5px;
+            color: var(--muted);
+            flex-shrink: 0
+        }
+
+        .edu-deg {
+            font-size: 12px;
+            color: #888;
+            margin-top: 3px
+        }
+
+        .edu-courses {
+            font-family: 'Geist Mono', monospace;
+            font-size: 10.5px;
+            color: #555;
+            margin-top: 6px;
+            line-height: 1.6
+        }
+
+        .vol-title {
+            font-size: 13px;
+            font-weight: 500
+        }
+
+        .vol-org {
+            font-family: 'Geist Mono', monospace;
+            font-size: 10.5px;
+            color: var(--muted);
+            margin-top: 2px
+        }
+
+        .vol-desc {
+            font-size: 12px;
+            color: #777;
+            margin-top: 6px;
+            line-height: 1.7
+        }
+
+        /* GITHUB CALENDAR REAL */
+        .calendar {
+            width: 100%
+        }
+
+        .calendar .contrib-number {
+            color: #888;
+            font-family: 'Geist Mono', monospace;
+            font-size: 11px
+        }
+
+        .calendar svg rect.ContributionCalendar-day {
+            rx: 2px
+        }
+
+        /* Stats row */
+        .gh-stats {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 16px;
+            flex-wrap: wrap
+        }
+
+        .gh-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 2px
+        }
+
+        .gh-stat-val {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -.02em;
+            color: var(--text)
+        }
+
+        .gh-stat-label {
+            font-family: 'Geist Mono', monospace;
+            font-size: 10px;
+            color: #555
+        }
+
+        /* FOOTER */
+        footer {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 32px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px
+        }
+
+        .foot-txt {
+            font-family: 'Geist Mono', monospace;
+            font-size: 11px;
+            color: var(--muted2)
+        }
+
+
+        /* ANIMATIONS */
+        @keyframes blurReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+                filter: blur(8px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0);
+            }
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(20px);
+            filter: blur(4px);
+            transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .fade-up.in {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        @media(max-width:600px) {
+            .proj-preview {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="cur"></div>
+    <div id="cur-ring"></div>
+
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <div class="nav-wrap">
+            <div class="nav-links">
+                <a href="#home" class="active">home</a>
+                <a href="#projects">projects</a>
+                <a href="#github">activity</a>
+                <a href="#education">education</a>
+                <a href="#contact">contact</a>
+            </div>
+            <div class="nav-right">
+                <button class="nav-icon" id="themeBtn" title="theme">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5" />
+                        <line x1="12" y1="1" x2="12" y2="3" />
+                        <line x1="12" y1="21" x2="12" y2="23" />
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                        <line x1="1" y1="12" x2="3" y2="12" />
+                        <line x1="21" y1="12" x2="23" y2="12" />
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                    </svg>
+                </button>
+                <button class="nav-icon" title="settings">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <section id="home">
+        <div class="page">
+
+            <div class="hero-row fade-up">
+                <div class="avatar">
+                    <img src="182188871.png" alt="Aaditya Singhal"
+                        style="width:100%;height:100%;object-fit:cover;object-position:center;border-radius:50%">
+                    <div class="online"></div>
+                </div>
+                <div>
+                    <div class="hero-name-row">
+                        <span class="hero-name">Aaditya Singhal</span>
+                        <span class="hero-loc">| Delhi NCR, IND</span>
+                    </div>
+                    <div class="hero-role-wrap">
+                        <div class="role-slider" id="roleSlider">
+                            <div class="role-item">AI Engineer</div>
+                            <div class="role-item">Cloud Architect</div>
+                            <div class="role-item">ML Engineer</div>
+                            <div class="role-item">GenAI Developer</div>
+                            <div class="role-item">AI Engineer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="hero-desc fade-up" style="transition-delay:.06s">
+                <a href="https://github.com/aaditya3301" target="_blank">AI Engineer</a> skilled in Machine Learning, Deep Learning, and Generative AI. Building scalable, real-time AI systems on <a href="#projects">cloud platforms</a> with LLM-based applications, multi-agent architectures, and AI-driven automation.
+            </p>
+
+            <div class="socials fade-up" style="transition-delay:.11s">
+                <a href="mailto:aadityasinghal77@gmail.com" class="soc" title="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <rect x="2" y="4" width="20" height="16" rx="2" />
+                        <path d="m22 7-10 7L2 7" />
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/aaditya3301/" class="soc" title="LinkedIn"
+                    target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                    </svg>
+                </a>
+                <a href="https://x.com/aaditya_s3301" class="soc" title="Twitter/X" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg>
+                </a>
+                <a href="https://github.com/aaditya3301" class="soc" title="GitHub" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                    </svg>
+                </a>
+                <a href="resume.pdf" class="soc" title="Resume" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14,2 14,8 20,8" />
+                        <line x1="16" y1="13" x2="8" y2="13" />
+                        <line x1="16" y1="17" x2="8" y2="17" />
+                    </svg>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ── SKILLS ── -->
+    <section id="skills">
+        <div class="page">
+            <div class="sec-title fade-up">Skills <span class="hash"></span></div>
+            <div class="skills-wrap" id="skillsWrap">
+                <span class="skill ai"><span class="sk-dot"></span>TensorFlow</span>
+                <span class="skill ai"><span class="sk-dot"></span>PyTorch</span>
+                <span class="skill ai"><span class="sk-dot"></span>Keras</span>
+                <span class="skill ai"><span class="sk-dot"></span>LLMs</span>
+                <span class="skill ai"><span class="sk-dot"></span>RAGs</span>
+                <span class="skill ai"><span class="sk-dot"></span>LoRA</span>
+                <span class="skill ai"><span class="sk-dot"></span>NLP</span>
+                <span class="skill ai"><span class="sk-dot"></span>SpaCy</span>
+                <span class="skill ai"><span class="sk-dot"></span>OpenCV</span>
+                <span class="skill lang"><span class="sk-dot"></span>TypeScript</span>
+                <span class="skill lang"><span class="sk-dot"></span>Python</span>
+                <span class="skill framework"><span class="sk-dot"></span>Next.js</span>
+                <span class="skill framework"><span class="sk-dot"></span>Express.js</span>
+                <span class="skill framework"><span class="sk-dot"></span>Flask</span>
+                <span class="skill framework"><span class="sk-dot"></span>Socket.IO</span>
+                <span class="skill tool"><span class="sk-dot"></span>AWS Bedrock</span>
+                <span class="skill tool"><span class="sk-dot"></span>SageMaker</span>
+                <span class="skill tool"><span class="sk-dot"></span>VertexAI</span>
+                <span class="skill tool"><span class="sk-dot"></span>Lambda</span>
+                <span class="skill tool"><span class="sk-dot"></span>Docker</span>
+                <span class="skill tool"><span class="sk-dot"></span>CI/CD</span>
+                <span class="skill tool"><span class="sk-dot"></span>CloudWatch</span>
+                <span class="skill db"><span class="sk-dot"></span>PostgreSQL</span>
+                <span class="skill db"><span class="sk-dot"></span>MongoDB</span>
+                <span class="skill db"><span class="sk-dot"></span>DynamoDB</span>
+                <span class="skill db"><span class="sk-dot"></span>Redis</span>
+                <span class="skill db"><span class="sk-dot"></span>Pinecone</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── PROJECTS ── -->
+    <section id="projects">
+        <div class="page">
+            <div class="sec-title fade-up">Projects <span class="hash"></span></div>
+            <div class="projects-list">
+
+                <div class="project fade-up">
+                    <div class="proj-row">
+                        <div class="proj-left"><span class="proj-arrow"></span><span
+                                class="proj-title">Prism Insights</span></div>
+                        <div class="proj-icons"><a href="https://github.com/aaditya3301" class="proj-icon-link"
+                                title="GitHub" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                    <polyline points="15,3 21,3 21,9" />
+                                    <line x1="10" y1="14" x2="21" y2="3" />
+                                </svg></a></div>
+                    </div>
+                    <p class="proj-desc">Fully AWS-powered multi-agent AI analytics platform using Bedrock, Lambda, DynamoDB, and CDK to optimize MSP operations with real-time insights and autonomous intelligence.</p>
+                    <div class="tech-row"><span class="tech">AWS Bedrock</span><span class="tech">Lambda</span><span
+                            class="tech">DynamoDB</span><span class="tech">CDK</span><span
+                            class="tech">Multi-Agent AI</span></div>
+                </div>
+
+                <div class="project fade-up" style="transition-delay:.06s">
+                    <div class="proj-row">
+                        <div class="proj-left"><span class="proj-arrow"></span><span class="proj-title">P.A.R.T.H</span>
+                        </div>
+                        <div class="proj-icons"><a href="https://github.com/aaditya3301" class="proj-icon-link"
+                                title="GitHub" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                    <polyline points="15,3 21,3 21,9" />
+                                    <line x1="10" y1="14" x2="21" y2="3" />
+                                </svg></a></div>
+                    </div>
+                    <p class="proj-desc">Real-time GCP-based human-AI interaction interface with live video, speech processing, and neural response streaming over secure HTTPS/WSS endpoints.</p>
+                    <div class="tech-row"><span class="tech">GCP</span><span class="tech">WebSockets</span><span
+                            class="tech">Speech AI</span><span class="tech">Real-time</span></div>
+                </div>
+
+                <div class="project fade-up" style="transition-delay:.12s">
+                    <div class="proj-row">
+                        <div class="proj-left"><span class="proj-arrow"></span><span class="proj-title">LexBharat</span>
+                        </div>
+                        <div class="proj-icons"><a href="https://github.com/aaditya3301/LexBharat" class="proj-icon-link"
+                                title="GitHub" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                    <polyline points="15,3 21,3 21,9" />
+                                    <line x1="10" y1="14" x2="21" y2="3" />
+                                </svg></a></div>
+                    </div>
+                    <p class="proj-desc">Cloud-native AI platform that processes Indian legal documents using LLMs and serverless compute, deployed on GCP for scalable document processing and actionable insights.</p>
+                    <div class="tech-row"><span class="tech">LLMs</span><span class="tech">GCP</span><span
+                            class="tech">Serverless</span><span class="tech">Legal AI</span></div>
+                </div>
+
+                <div class="project fade-up" style="transition-delay:.18s">
+                    <div class="proj-row">
+                        <div class="proj-left"><span class="proj-arrow"></span><span class="proj-title">Tea</span>
+                        </div>
+                        <div class="proj-icons"><a href="https://github.com/aaditya3301" class="proj-icon-link"
+                                title="GitHub" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                    <polyline points="15,3 21,3 21,9" />
+                                    <line x1="10" y1="14" x2="21" y2="3" />
+                                </svg></a></div>
+                    </div>
+                    <p class="proj-desc">Cloud-native AI system for real-time call transcription and automated task execution using LLMs and multi-platform API integrations with Google Meet, Zoom, and Teams.</p>
+                    <div class="tech-row"><span class="tech">LLMs</span><span class="tech">APIs</span><span
+                            class="tech">Transcription</span><span class="tech">Automation</span></div>
+                </div>
+
+            </div>
+            <a href="https://github.com/aaditya3301" target="_blank" class="more-btn fade-up"
+                style="transition-delay:.3s">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12,5 19,12 12,19" />
+                </svg>
+                view all on github
+            </a>
+        </div>
+    </section>
+
+    <!-- ── GITHUB ACTIVITIES ── -->
+    <section id="github">
+        <div class="page">
+            <div class="sec-title fade-up">GitHub Activity <span class="hash"></span></div>
+            <div class="fade-up" style="transition-delay:.06s">
+                <div class="gh-wrap" id="ghCal" style="position:relative">
+                    <div id="gh-loading"
+                        style="font-family:'Geist Mono',monospace;font-size:11px;color:#333;padding:20px 0">Loading
+                        contributions...</div>
+                </div>
+                <div class="gh-legend" style="margin-top:8px">
+                    Less <div class="gh-leg">
+                        <div class="gh-leg-cell" style="background:#141414;border:1px solid #1a1a1a"></div>
+                        <div class="gh-leg-cell gh-cell l1"></div>
+                        <div class="gh-leg-cell gh-cell l2"></div>
+                        <div class="gh-leg-cell gh-cell l3"></div>
+                        <div class="gh-leg-cell gh-cell l4"></div>
+                    </div> More
+                    <span style="flex:1"></span>
+                    <a href="https://github.com/aaditya3301" target="_blank"
+                        style="color:#4ade80;text-decoration:none;font-size:10px;opacity:.8"
+                        onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.8">
+                        github.com/aaditya3301 ↗
+                    </a>
+                </div>
+                <!-- Tooltip -->
+                <div id="gh-tip"
+                    style="position:fixed;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:5px;padding:6px 10px;font-family:'Geist Mono',monospace;font-size:10px;color:#ccc;pointer-events:none;z-index:999;display:none;white-space:nowrap">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ── ACHIEVEMENTS ── -->
+    <section id="volunteer">
+        <div class="page">
+            <div class="sec-title fade-up">Hackathons & Leadership <span class="hash"></span></div>
+            <div class="vol-list">
+                <div class="vol-item">
+                    <div class="vol-title">🏆 Organizer — PortXFolio Hackathon</div>
+                    <div class="vol-org">Scaled event to 1,000+ participants · $5k+ prizes</div>
+                </div>
+                <div class="vol-item" style="transition-delay:.05s">
+                    <div class="vol-title">🥇 Winner — SuperHacks</div>
+                    <div class="vol-org">Best Jury Award · Agentic AI Hackathon</div>
+                </div>
+                <div class="vol-item" style="transition-delay:.1s">
+                    <div class="vol-title">🥇 Winner — Mega Hackathon</div>
+                    <div class="vol-org">Business Innovation Award · Built Bidzy (real-time logistics bidding)</div>
+                </div>
+                <div class="vol-item" style="transition-delay:.15s">
+                    <div class="vol-title">🥇 Winner — HackOClock</div>
+                    <div class="vol-org">Best Beginners Award</div>
+                </div>
+                <div class="vol-item" style="transition-delay:.2s">
+                    <div class="vol-title">🥇 Winner — MindTheGapChallenge</div>
+                    <div class="vol-org">Built the winning AI tool</div>
+                </div>
+                <div class="vol-item" style="transition-delay:.25s">
+                    <div class="vol-title">🏅 SIH'25 Grand Finalist</div>
+                    <div class="vol-org">Smart India Hackathon 2025</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CONTACT ── -->
+    <section id="contact">
+        <div class="page">
+            <div class="sec-title fade-up">Contact <span class="hash"></span></div>
+            <p class="hero-desc fade-up" style="transition-delay:.04s;margin-bottom:16px">
+                Open to internships, freelance, and interesting collabs. If you have a cool idea — let's talk.
+            </p>
+            <div class="socials fade-up" style="transition-delay:.08s">
+                <a href="mailto:aadityasinghal77@gmail.com" class="soc" title="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <rect x="2" y="4" width="20" height="16" rx="2" />
+                        <path d="m22 7-10 7L2 7" />
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/aaditya3301/" target="_blank" class="soc" title="LinkedIn"><svg
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                    </svg></a>
+                <a href="https://github.com/aaditya3301" target="_blank" class="soc" title="GitHub"><svg
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                    </svg></a>
+                <a href="https://x.com/aaditya_s3301" target="_blank" class="soc" title="Twitter/X"><svg
+                        viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <span class="foot-txt">Designed & Developed by Aaditya Singhal &nbsp;·&nbsp; © 2026</span>
+        <span class="foot-txt">New Delhi, India</span>
+    </footer>
+
+    <script>
+        // ─────────────────────────────────────────────
+        // CURSOR
+        // ─────────────────────────────────────────────
+        const cur = document.getElementById('cur'), ring = document.getElementById('cur-ring');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY });
+        (function tick() {
+            cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+            rx += (mx - rx) * .1; ry += (my - ry) * .1;
+            ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+            requestAnimationFrame(tick);
+        })();
+        document.querySelectorAll('a,button').forEach(el => {
+            el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+            el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+        });
+
+        // ─────────────────────────────────────────────
+        // NAV
+        // ─────────────────────────────────────────────
+        const navbar = document.getElementById('navbar');
+        const sections = ['home', 'skills', 'projects', 'github', 'certifications', 'education', 'volunteer', 'contact'];
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('stuck', scrollY > 20);
+            let cur2 = 'home';
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && scrollY >= el.offsetTop - 120) cur2 = id;
+            });
+            document.querySelectorAll('.nav-links a').forEach(a => {
+                const href = a.getAttribute('href').replace('#', '');
+                a.classList.toggle('active', href === cur2 || ('#' + href) === '#' + cur2);
+            });
+        }, { passive: true });
+
+        // ─────────────────────────────────────────────
+        // SCROLL FADE-IN
+        // ─────────────────────────────────────────────
+        new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') });
+        }, { threshold: 0.07 }).observe.bind(
+            new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') });
+            }, { threshold: 0.07 })
+        );
+        const fadeObs = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') });
+        }, { threshold: 0.07 });
+        document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+        document.querySelectorAll('.edu-item, .vol-item').forEach(el => fadeObs.observe(el));
+
+        // ─────────────────────────────────────────────
+        // ROTATING ROLE
+        // ─────────────────────────────────────────────
+        const slider = document.getElementById('roleSlider');
+        const roles = ['Developer', 'Engineer', 'Builder', 'AI/ML Enthusiast'];
+        let ri = 0;
+        setInterval(() => {
+            ri = (ri + 1) % roles.length;
+            slider.style.transform = `translateY(-${ri * 16}px)`;
+        }, 2400);
+
+        // ─────────────────────────────────────────────
+        // SKILLS STAGGER
+        // ─────────────────────────────────────────────
+        new IntersectionObserver(entries => {
+            if (!entries[0].isIntersecting) return;
+            document.querySelectorAll('.skill').forEach((el, i) => setTimeout(() => el.classList.add('in'), i * 28));
+        }, { threshold: 0.1 }).observe(document.getElementById('skills'));
+
+        // GitHub calendar rendered via ghchart.rshah.org image
+
+        // ─────────────────────────────────────────────
+        // GITHUB CONTRIBUTION HEATMAP (real data)
+        // ─────────────────────────────────────────────
+        (async function () {
+            var wrap = document.getElementById('ghCal');
+            var loading = document.getElementById('gh-loading');
+            var tip = document.getElementById('gh-tip');
+            if (!wrap) return;
+            try {
+                // API returns flat array: [{date, count, level}, ...]
+                var res = await fetch('https://github-contributions-api.jogruber.de/v4/aaditya3301?y=last');
+                var data = await res.json();
+                var days = data.contributions; // flat array of daily entries
+                if (!days || !days.length) throw new Error('no data');
+
+                // Sort by date ascending
+                days.sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+
+                // Group into weeks (each week = array of up to 7 days, Sunday=0)
+                var weeks = [];
+                var currentWeek = [];
+                // pad first week with empty days if needed
+                var firstDay = new Date(days[0].date);
+                var startDow = firstDay.getDay(); // 0=Sun
+                for (var p = 0; p < startDow; p++) currentWeek.push(null);
+
+                days.forEach(function (day) {
+                    currentWeek.push(day);
+                    if (currentWeek.length === 7) {
+                        weeks.push(currentWeek);
+                        currentWeek = [];
+                    }
+                });
+                if (currentWeek.length) weeks.push(currentWeek);
+
+                // Build month header
+                var months = [];
+                weeks.forEach(function (w, wi) {
+                    var firstReal = w.find(function (d) { return d; });
+                    if (!firstReal) return;
+                    var m = new Date(firstReal.date).toLocaleString('en', { month: 'short' });
+                    if (!months.length || months[months.length - 1].label !== m)
+                        months.push({ label: m, col: wi });
+                });
+
+                var mRow = document.createElement('div');
+                mRow.style.cssText = 'display:flex;margin-bottom:5px;padding-left:22px';
+                months.forEach(function (mo, i) {
+                    var span = document.createElement('span');
+                    var nextCol = months[i + 1] ? months[i + 1].col : weeks.length;
+                    span.style.cssText = 'width:' + ((nextCol - mo.col) * 13) + 'px;font-family:"Geist Mono",monospace;font-size:10px;color:#3a3a3a;flex-shrink:0;overflow:hidden';
+                    span.textContent = mo.label;
+                    mRow.appendChild(span);
+                });
+
+                var grid = document.createElement('div');
+                grid.style.cssText = 'display:flex;gap:3px;align-items:flex-start';
+
+                // Day labels col
+                var dl = document.createElement('div');
+                dl.style.cssText = 'display:flex;flex-direction:column;gap:3px;margin-right:4px';
+                ['', 'Mon', '', 'Wed', '', 'Fri', ''].forEach(function (d) {
+                    var s = document.createElement('span');
+                    s.textContent = d;
+                    s.style.cssText = 'width:18px;height:10px;line-height:10px;font-family:"Geist Mono",monospace;font-size:9px;color:#2a2a2a;text-align:right;flex-shrink:0;display:block';
+                    dl.appendChild(s);
+                });
+                grid.appendChild(dl);
+
+                var totalContribs = 0;
+                weeks.forEach(function (week) {
+                    var col = document.createElement('div');
+                    col.style.cssText = 'display:flex;flex-direction:column;gap:3px';
+                    for (var di = 0; di < 7; di++) {
+                        var day = week[di];
+                        var cell = document.createElement('div');
+                        if (!day) {
+                            cell.className = 'gh-cell';
+                            cell.style.visibility = 'hidden';
+                        } else {
+                            var lvl = Math.min(day.level || 0, 4);
+                            cell.className = 'gh-cell' + (lvl > 0 ? ' l' + lvl : '');
+                            totalContribs += day.count || 0;
+                            (function (d) {
+                                cell.addEventListener('mouseenter', function (e) {
+                                    var dt = new Date(d.date).toLocaleDateString('en', { month: 'short', day: 'numeric', year: 'numeric' });
+                                    tip.textContent = d.count === 0 ? ('No contributions on ' + dt) : (d.count + ' contribution' + (d.count > 1 ? 's' : '') + ' on ' + dt);
+                                    tip.style.display = 'block';
+                                });
+                                cell.addEventListener('mousemove', function (e) {
+                                    var x = e.clientX + 14, y = e.clientY - 36;
+                                    if (x + 220 > window.innerWidth) x = e.clientX - 230;
+                                    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+                                });
+                                cell.addEventListener('mouseleave', function () { tip.style.display = 'none'; });
+                            })(day);
+                        }
+                        col.appendChild(cell);
+                    }
+                    grid.appendChild(col);
+                });
+
+                if (loading) loading.remove();
+                wrap.appendChild(mRow);
+                wrap.appendChild(grid);
+
+                var info = document.createElement('p');
+                info.style.cssText = 'margin-top:8px;font-family:"Geist Mono",monospace;font-size:11px;color:#3a3a3a';
+                info.textContent = totalContribs + ' contributions in the last year';
+                wrap.appendChild(info);
+
+            } catch (err) {
+                if (loading) loading.textContent = 'Could not load contributions. Visit github.com/aaditya3301';
+            }
+        })();
+
+    </script>
+</body>
+
+</html>
