@@ -19,8 +19,11 @@
         }
 
         html {
-            scroll-behavior: smooth
-        }
+    scroll-behavior: smooth;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+}
 
         body {
             background: var(--bg);
@@ -890,3 +893,122 @@
                 display: none
             }
         }
+
+html.light-theme, body.light-theme {
+    --bg: #ffffff;
+    --surface: #f9f9f9;
+    --border: #e5e5e5;
+    --border2: #d4d4d4;
+    --text: #1a1a1a;
+    --muted: #52525b;
+    --muted2: #71717a;
+    background: var(--bg);
+    color: var(--text);
+}
+:is(html, body).light-theme .avatar {
+    background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+}
+:is(html, body).light-theme .skill {
+    background: #f4f4f5;
+    color: #1a1a1a;
+}
+:is(html, body).light-theme .skill:hover {
+    background: #e4e4e7;
+    color: #000;
+}
+:is(html, body).light-theme .tech {
+    background: #f4f4f5;
+    color: #1a1a1a;
+    border-color: #e5e5e5;
+}
+:is(html, body).light-theme .tech:hover {
+    background: #e4e4e7;
+    border-color: #d4d4d4;
+}
+:is(html, body).light-theme .cert {
+    background: #f9f9f9;
+}
+:is(html, body).light-theme .blog-thumb {
+    background: #f4f4f5;
+}
+:is(html, body).light-theme .more-btn:hover {
+    background: #f4f4f5;
+}
+:is(html, body).light-theme nav.stuck {
+    background: rgba(255, 255, 255, .9);
+}
+:is(html, body).light-theme .hero-desc a:hover {
+    background: rgba(234, 179, 8, 0.2);
+}
+:is(html, body).light-theme .gh-cell {
+    background: #ebedf0;
+    border-color: rgba(27,31,35,0.06);
+}
+:is(html, body).light-theme .gh-cell.l1 { background: #9be9a8; border-color: rgba(27,31,35,0.06); }
+:is(html, body).light-theme .gh-cell.l2 { background: #40c463; border-color: rgba(27,31,35,0.06); }
+:is(html, body).light-theme .gh-cell.l3 { background: #30a14e; border-color: rgba(27,31,35,0.06); }
+:is(html, body).light-theme .gh-cell.l4 { background: #216e39; border-color: rgba(27,31,35,0.06); }
+:is(html, body).light-theme .gh-leg-cell[style*="background:#141414"] {
+    background: #ebedf0 !important;
+    border-color: rgba(27,31,35,0.06) !important;
+}
+:is(html, body).light-theme #cur {
+    background: #000;
+}
+:is(html, body).light-theme #cur-ring {
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+:is(html, body).light-theme.hovering #cur-ring {
+    border-color: rgba(0, 0, 0, .45);
+}
+
+
+:is(html, body).light-theme .hero-desc {
+    color: #444444;
+    font-weight: 500;
+}
+
+
+:is(html, body).light-theme .proj-desc,
+:is(html, body).light-theme .cert-desc,
+:is(html, body).light-theme .vol-desc,
+:is(html, body).light-theme .edu-deg,
+:is(html, body).light-theme .edu-courses {
+    color: #555555;
+    font-weight: 400;
+}
+
+:is(html, body).light-theme .vol-org,
+:is(html, body).light-theme .edu-loc,
+:is(html, body).light-theme .blog-meta,
+:is(html, body).light-theme .nav-links a,
+:is(html, body).light-theme .hero-loc,
+:is(html, body).light-theme .role-item {
+    color: #666666;
+}
+
+:is(html, body).light-theme .nav-links a.active,
+:is(html, body).light-theme .nav-links a:hover,
+:is(html, body).light-theme .hero-name,
+:is(html, body).light-theme .sec-title,
+:is(html, body).light-theme .proj-title,
+:is(html, body).light-theme .vol-title,
+:is(html, body).light-theme .edu-school {
+    color: #111111;
+}
+
+:is(html, body).light-theme .soc {
+    background: #ffffff;
+    border-color: #d4d4d4;
+    color: #555555;
+}
+
+:is(html, body).light-theme .soc:hover {
+    background: #f4f4f5;
+    border-color: #a1a1aa;
+    color: #111111;
+}
+
+:is(html, body).light-theme .cert-name {
+    color: #111111;
+}
