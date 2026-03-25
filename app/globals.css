@@ -33,9 +33,11 @@
             line-height: 1.7;
             overflow-x: hidden;
             cursor: none;
-            border: 1px solid var(--border);
-            max-width: 685px;
-            margin-left: 615px;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            max-width: 700px;
+            margin: 0 auto;
+            min-height: 100vh;
         }
 
         /* CURSOR */

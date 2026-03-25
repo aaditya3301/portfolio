@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Aaditya Singhal | AI & Cloud Engineer',
+  title: 'Aaditya Singhal',
   description: 'AI Engineer skilled in Machine Learning, Deep Learning, and Generative AI.',
 };
 
